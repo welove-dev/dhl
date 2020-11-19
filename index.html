@@ -1,0 +1,860 @@
+<?php
+session_start();
+$isHttps =
+    (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ||
+    (isset($_SERVER['SERVER_PORT']) && (int) $_SERVER['SERVER_PORT'] === 443)
+;
+
+$request = 'http'.(($isHttps) ? 's' : '' ).'://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+?>
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <title></title>
+    <style>
+        @font-face {
+            font-family: 'Delivery-Rg';
+            src: url('fonts/Delivery_W_Rg.woff2') format('woff2'),
+                url('fonts/Delivery_W_Rg.woff') format('woff');
+        }
+        @font-face {
+            font-family: 'Delivery-Bd';
+            src: url('fonts/Delivery_W_Bd.woff2') format('woff2'),
+                url('fonts/Delivery_W_Bd.woff') format('woff');
+        }
+        @font-face {
+            font-family: 'Delivery-CdBlk';
+            src: url('fonts/Delivery_W_CdBlk.woff2') format('woff2'),
+                url('fonts/Delivery_W_CdBlk.woff') format('woff');
+        }
+        @font-face {
+            font-family: 'Delivery-Lt';
+            src: url('fonts/Delivery_W_Lt.woff2') format('woff2'),
+                url('fonts/Delivery_W_Lt.woff') format('woff');
+        }
+        body {
+            font-family: 'Delivery-Rg', sans-serif;
+        }
+        h2,
+        h3,
+        h4,
+        h6 {
+            font-family: 'Delivery-CdBlk', sans-serif;
+        }
+        .font-b,
+        p.size-small,
+        b,
+        span {
+            font-family: 'Delivery-Bd', sans-serif;
+        }
+        .bg-logo-alfa {
+            background-image: linear-gradient(-180deg, #fc0 0, #ffd83f 70%, rgba(255, 216, 63, 0) 100%);
+        }
+        .header-img {
+            background: url("header-dhl.jpg") no-repeat #c8deeb;
+            height: 433px;
+            background-position: left center;
+        }
+        .logo-gradient {
+            position: absolute;
+            left: 2%;
+            bottom: 5%;
+        }
+        button {
+            border-color: #a4290f !important;
+        }
+        button,
+        input {
+            border-radius: 0 !important;
+        }
+        p,
+        label,
+        button {
+            font-size: 14px !important;
+        }
+        label {
+            color: #9a9a9a !important;
+        }
+        h2 {
+            font-size: 26px !important;
+        }
+        .card-title--wrapper {
+            min-height: 60px;
+        }
+        h4 {
+            font-size: 18px !important;
+        }
+        h4 small {
+            font-family: "Delivery-Lt";
+        }
+        h5 {
+            font-size: 16px !important;
+        }
+        span.size-big {
+            font-size: 40px !important;
+        }
+        .size-small {
+            font-size: 12px !important;
+            font-weight: bold;
+        }
+        li {
+            list-style: none;
+        }
+        li a {
+            font-size: 14px !important;
+            color: #707070;
+        }
+        .text-dark {
+            color: #414141 !important;
+        }
+        .bg-primary {
+            background-color: #FFCC00 !important;
+            color: #D40511 !important;
+        }
+        .bg-secondary {
+            background-color: #f2f2f2 !important;
+        }
+        .bg-danger {
+            background-color: #a4290f !important;
+        }
+        .bg-warning {
+            background-color: #FFCC00 !important;
+        }
+        .bg-light {
+            background-color: #f2f2f2 !important;
+            color: #666 !important;
+        }
+        .bg-gradient {
+            color: #D40511 !important;
+            background: rgb(255,204,0);
+            background: linear-gradient(180deg, rgba(255,204,0,1) 0%, rgba(255,204,0,1) 30%, rgba(255,204,0,0.2976540958180147) 100%);
+        }
+        .text-red {
+            color: #cb1f12;
+        }
+        .text-primary {
+            color: #cb1f12 !important;
+        }
+        .btn-primary {
+            background-color: #cb1f12 !important;
+            border: 2px solid #cb1f12 !important;
+            font-family: "Delivery-Bd", sans-serif;
+            border-radius: 3px;
+            transition: .5s ease;
+        }
+        .btn-primary:hover {
+            background-color: #fff !important;
+            color: #cb1f12;
+        }
+        .border-top {
+            border-top: 3px solid #c2c2c2 !important;
+        }
+        p.info-dhl {
+            font-size: 10px !important;
+        }
+        p.info-dhl span a {
+            text-decoration: underline;
+        }
+        p {
+            line-height: 1;
+        }
+        .size-img {
+            width: 93px;
+            height: 96px;
+        }
+        .size-img-medium {
+            width: 90px;
+            height: 90px;
+        }
+        .size-img-small {
+            width: 76px;
+            height: 76px;
+        }
+        .size-img-squere {
+            width: 76px;
+            height: 86px;
+        }
+        .size-img-map {
+            width: 250px;
+            height: 250px;
+        }
+        .img-smaller {
+            width: 50px;
+        }
+        .fa-youtube {
+            content: "\f167";
+            border: 2px solid #dadada;
+            border-radius: 50%;
+            padding: 14px;
+            font-size: 20px
+        }
+        .fa-linkedin {
+            content: "\f0e1";
+            border: 2px solid #dadada;
+            border-radius: 50%;
+            padding: 14px;
+            font-size: 20px
+        }
+        span.error {
+            font-size: 12px;
+            color: red;
+        }
+        #form_error {
+            display: none;
+        }
+        .embed-responsive {
+            height: 1200px;
+        }
+        .card-header {
+            font-size: 1.75rem !important;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 2rem 0 !important;
+        }
+        .card-header small {
+            font-size: 1.1rem !important;
+        }
+        .card-title {
+            font-family: "Delivery-Lt", sans-serif;
+            font-size: 1.6rem;
+            text-transform: uppercase;
+            margin-bottom: 0;
+        }
+        .card-title strong {
+            font-family: "Delivery-Bd", sans-serif;
+            font-size: 1.6rem;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .section-title {
+            font-size: 3rem !important;
+        }
+        ul li {
+            list-style-type: disc;
+            margin-bottom: .5rem;
+        }
+        .list-unstyled li {
+            list-style-type: none !important;;
+        }
+        @media (min-width:1200px) {
+
+            .logo-opineo,
+            .logo-gemius {
+                width: 70% !important;
+            }
+        }
+        @media (max-width:1200px) {
+            .logo-opineo,
+            .logo-gemius {
+                width: 80% !important;
+            }
+            .header-img {
+                background: url("header-dhl.jpg") no-repeat #c8deeb;
+                height: 433px;
+                background-position: left center;
+            }
+        }
+        @media (max-width:992px) {
+            .logo-opineo,
+            .logo-gemius {
+                width: 100% !important;
+            }
+            .header-img {
+                background-color: #c8deeb;
+                background-size: contain;
+                background-position: left center;
+            }
+            .card-deck .card {
+                flex: 1 1 auto;
+            }
+        }
+        @media (max-width:768px) {
+            .logo-partnerzy {
+                width: 100% !important;
+            }
+            .logo-opineo,
+            .logo-gemius {
+                width: 50% !important;
+            }
+            .img-smaller {
+                width: 40px
+            }
+        }
+        @media (max-width:380px) {
+            .logo-opineo,
+            .logo-gemius {
+                width: 60% !important;
+            }
+            .header-img {
+                background-position: -700px;
+            }
+        }
+        .header-icon{
+            font-size: 1.7em;
+            vertical-align: top;
+            padding: 5px;
+            color:#d30616;
+        }
+        .header-text{
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <section>
+            <!-- header -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="container ">
+                        <div class="row">
+                            <div class="col-12 header-img ">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="container">
+                        <div class="row">
+                          <div class="col-sm mt-4 pr-4">
+                            <i class="far fa-check-circle header-icon"></i>
+                            <div class="header-text"><strong>Integracja IT</strong><br>
+                            <p>Automatyzacja codziennych przesyłek</p></div>
+                            
+                          </div>
+                          <div class="col-sm mt-4 pr-4">
+                            <i class="far fa-check-circle header-icon"></i>
+                            <div class="header-text"><strong>DHL24</strong><br>
+                            <p>Centrum zarządzania Twoimi przesyłkami</p></div>
+                          </div>
+                          <div class="col-sm mt-4 pr-4">
+                            <i class="far fa-check-circle header-icon"></i>
+                            <div class="header-text"><strong>Faktury i rozliczenia</strong><br>
+                            <p>Zawsze dostępne w jednym miejscu</p></div>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+                
+            </div>
+        </section><!-- /header -->
+
+        <section>
+            <!-- 3 kolumny cards -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="embed-responsive embed-responsive-16by9" id="formularz">
+                                    <iframe src="https://samoofertowanie.dhlparcel.pl/form/fast" frameborder="0" class="embed-responsive-item"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <h2 class="text-center text-red my-5">Wybierz ofertę dopasowaną do swoich potrzeb</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="card-deck">
+                                    <div class="card shadow mx-3">
+                                        <h4 class="pt-3 card-header bg-gradient text-center font-weight-bold text-uppercase border-0">do 30 paczek/mies.</h4>
+                                        <div class="card-body px-3 pt-4">
+                                            <div class="card-title--wrapper d-flex align-items-center justify-content-center">
+                                                <h3 class="card-title text-primary text-center">od <strong>10,86 zł</strong></h3>
+                                            </div>
+                                            <ul class="mt-4 pl-4">
+                                                <li><b>10% rabatu przy nadaniu w sieci 10000 punktów DHL</b></li>
+                                                <li><b>1,5 zł za ubezpieczenie</b> do 50 tys. zł</li>
+                                                <li><b>3,5 zł za płatność pobraniem</b> (COD)</li>
+                                                <li>podjazd kuriera bez opłat</li>
+                                                <li>tylko <b>+2,50 zł za dostawę z gwarancją next day</b> (DHL Premium)</li>
+                                                <li><b>bezpłatne powiadomienia</b> e-mail i SMS dla odbiorców</li>
+                                                <li><b>jedna umowa</b> dla paczek kurierskich, do punktu i palet</li>
+                                            </ul>
+                                        </div>
+                                        <div class="pb-5 card-footer text-center bg-white border-0">
+                                            <a href="#formularz" class="btn btn-primary text-center">Zamawiam ofertę</a>
+                                        </div>
+                                    </div>
+                                    <div class="card shadow mx-3">
+                                        <h4 class="pt-3 card-header bg-light text-center font-weight-bold text-uppercase border-0">od 30 paczek/mies.</h4>
+                                        <div class="card-body px-3 pt-4">
+                                            <div class="card-title--wrapper d-flex align-items-center justify-content-center">
+                                                <h3 class="card-title text-primary text-center">od <strong>9,92 zł</strong> <small class="d-block"></small></h3>
+                                            </div>
+                                            <ul class="mt-4 pl-4">
+                                                <li><b>10% rabatu przy nadaniu w sieci 10000 punktów DHL</b></li>
+                                                <li><b>od 0,85 zł za ubezpieczenie</b> do 50 tys. zł</li>
+                                                <li><b>od 2,5 zł za płatność pobraniem</b> (COD)</li>
+                                                <li>podjazd kuriera bez opłat</li>
+                                                <li>tylko <b>+2,50 zł za dostawę z gwarancją next day</b> (DHL Premium)</li>
+                                                <li><b>bezpłatne powiadomienia</b> e-mail i SMS dla odbiorców</li>
+                                                <li><b>jedna umowa</b> dla paczek kurierskich, do punktu i palet</li>
+                                            </ul>
+                                        </div>
+                                        <div class="pb-5 card-footer text-center bg-white border-0">
+                                            <a href="#formularz" class="btn btn-primary text-center">Zamawiam ofertę</a>
+                                        </div>
+                                    </div>
+                                    <div class="card shadow mx-3">
+                                        <h4 class="pt-3 card-header bg-light text-center font-weight-bold text-uppercase border-0">od 100 paczek/mies.</h4>
+                                        <div class="card-body px-3 pt-4">
+                                            <div class="card-title--wrapper d-flex align-items-center justify-content-center">
+                                                <h3 class="card-title text-primary text-center"><strong>stawki indywidualne</strong></h3>
+                                            </div>
+                                            <ul class="mt-4 pl-4">
+                                                <li><b>od 0,85 zł za ubezpieczenie</b> do 50 tys. zł</li>
+                                                <li><b>od 2,5 zł za płatność pobraniem</b> (COD)</li>
+                                                <li>podjazd kuriera bez opłat</li>
+                                                <li>bezpłatna możliwość ustalenia stałych zbiorów</li>
+                                                <li>tylko <b>+2,50 zł za dostawę z gwarancją next day</b> (DHL Premium)</li>
+                                                <li><b>bezpłatne powiadomienia</b> e-mail i SMS dla odbiorców</li>
+                                                <li><b>jedna umowa</b> dla paczek kurierskich, do punktu i palet</li>
+                                            </ul>
+                                        </div>
+                                        <div class="pb-5 card-footer text-center bg-white border-0">
+                                            <a href="#formularz" class="btn btn-primary text-center">Zamawiam ofertę</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col">
+                                <p class="mb-2">
+                                    Podane powyżej ceny, to ceny netto, bez kosztów opłaty paliwowej i drogowej oraz usług dodatkowych.
+                                </p>
+                                <p>
+                                    Cena przestaje obowiązywać w przypadku zmiany Cennika Usług DHL Parcel &mdash; Cennik Specjalny.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </section><!-- /3 kolumny cards -->
+        <section class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <h2 class="section-title">Dlaczego warto wybrać DHL Parcel?</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-center">
+                    <h2 class="text-primary my-5">Wszystko w jednym miejscu</h2>
+                </div>
+            </div>
+            <div class="row justify-content-between mt-4">
+                <div class="col-12 col-md-2 text-center">
+                    <img class="img-fluid size-img-small" src="logo-przesylki_krajowe.png"
+                        alt="logo-przesylki_krajowe">
+                    <p class="pt-4">Przesyłki krajowe</p>
+                </div>
+                <div class="col-12 col-md-2   text-center">
+                    <img class="img-fluid size-img-small" src="logo-europa.png" alt="logo-europa">
+                    <p class=" pt-4">Tanie przesyłki do
+                        28 krajów Europy</p>
+                </div>
+                <div class="col-12 col-md-2  text-center">
+                    <img class="img-fluid size-img-small" src="logo-drobnica.png" alt="logo-drobnica">
+                    <p class=" pt-4">Zwroty w Polsce
+                        i 28 krajach Europy</p>
+                </div>
+                <div class="col-12 col-md-2   text-center">
+                    <img class="img-fluid size-img-small" src="logo-paleta.png" alt="logo-paleta">
+                    <p class="pt-4">Przesyłki drobnicowe</p>
+                </div>
+            </div>
+        </section>
+        <section>
+            <!-- mapka-->
+            <div class="container-fluid py-3">
+                <div class="row">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <h2 class="text-center text-red my-5">Szeroka sieć 10 000 punktów nadania i odbioru
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-6 text-center">
+                                <img class="img-fluid" src="dhl-mapka-nowa_01.jpg" alt="8000 punktów">
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <img class="img-fluid" src="dhl-mapka-nowa_02.jpg" alt="sieć punktów partnerskich">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- /mapka-->
+
+        <section>
+            <!-- /3-loga-->
+            <div class="container-fluid py-3">
+                <div class="row">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <h2 class="text-center text-red my-5">Bezplatne
+                                    usługi dla odbiorców - GRATIS!</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-4 text-center">
+                                <img class="size-img img-fluid" src="logo-przekieruj-paczke.png"
+                                    alt="logo-przekieruj-paczke-1">
+                                <p class="pt-4">Przekieruj paczkę</p>
+
+                            </div>
+                            <div class="col-12 col-md-4 text-center">
+                                <img class="size-img img-fluid" src="email-1.png" alt="logo-email-1">
+                                <p class="pt-4">Powiadomienie email / SMS</p>
+
+                            </div>
+                            <div class="col-12 col-md-4 text-center">
+                                <img class="size-img img-fluid" src="sasiad-1.png" alt="logo-sasiad-1">
+                                <p class="pt-4">Doręczenie do sąsiada</p>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section><!-- /3-loga-->
+
+        <section>
+            <!-- 4-loga2-->
+            <div class="container-fluid py-3">
+                <div class="row">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <h2 class="text-center text-red my-5">Wygodne
+                                    rozwiązania dla ecommerce</h2>
+
+                            </div>
+                        </div>
+                        <div class="row justify-content-between">
+                            <div class="col-12 col-md-2 text-center ">
+                                <img class="img-fluid size-img-medium" src="logo-integracja.png" alt="logo-integracja">
+                                <p class="pt-4 ">Szybka integracja IT
+                                    z Twoim esklepem
+                                    (wtyczki)</p>
+
+                            </div>
+                            <div class="col-12 col-md-2 text-center ">
+                                <img class="img-fluid size-img-medium" src="logo-serwis-24.png" alt="logo-serwis-24">
+                                <p class="pt-4 ">Całodobowe nadania online
+                                    w serwisie DHL24</p>
+
+                            </div>
+                            <div class="col-12 col-md-2 text-center">
+                                <img class="img-fluid size-img-medium" src="logo-zwrot-naleznosci.png"
+                                    alt="logo-zwrot-naleznosci">
+                                <p class="pt-4">Szybki zwrot należności z pobrań</p>
+
+                            </div>
+
+                            <div class="col-12 col-md-2 text-center px-1">
+                                <img class="img-fluid size-img-medium" src="logo-punkt-DHL.png" alt="logo-punkt-DHL">
+                                <p class="pt-4">Nie musisz czekać na kuriera,
+                                    pojedyncze paczki nadasz w Punktach DHL POP</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- /4-loga2-->
+        <section>
+            <!-- infolinia-->
+            <div class="container-fluid py-3">
+                <div class="row">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <h2 class="text-center text-red my-5"> Szybka
+                                    pomoc, gdy tego potrzebujesz</h2>
+
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div
+                                class="col-12 col-md-4 offset-md-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start">
+                                <h5><b>Scentralizowany Dział Obsługi Klienta</b></h5>
+                                 
+                                <h5>Zespół ponad 400 osób gotowych,
+                                    aby sprawnie pomóc naszym Klientom</h5>
+
+                            </div>
+                            <div class="col-12 col-md-6 offset-md-1">
+                                <img class="img-fluid" src="infolinia.png" alt="infolinia">
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </section> <!-- /infolinia-->
+        <section>
+            <!-- srodowisko-->
+
+            <div class="container-fluid py-3">
+                <div class="row">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <h2 class="text-center text-red my-5">Dbamy o
+                                    środowisko</h2>
+
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-3 text-center">
+                                <img class="img-fluid" src="srodowisko.png" alt="">
+                            </div>
+                            <div class="col-12 col-md-9 mt-3">
+                                <h5>Spełniamy ISO 14001 <b>(Środowisko)</b>, ISO 50001 <b>(Energia)</b>,
+                                    OHSAS:19001:2007 <b>(BHP)</b>, ISO 9001 <b>(Jakość)</b></h5>
+                                <h5 class="m-0">korzystamy z <b>zielonej energii</b> – Tauron EKO Premium</h5>
+                                <h5>wprowadzamy <b>elektryczne samochody i rowery</b> - cel 0 emisji spalin do
+                                    roku 2050</h5>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </section> <!-- /srodowisko-->
+        <section>
+            <!-- klienci-->
+            <div class="container-fluid pb-3">
+                <div class="row">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <h2 class="text-center text-red my-5">Zadowoleni
+                                    klienci</h2>
+
+                            </div>
+
+                        </div>
+                        <div class="row py-5">
+                            <div class="col-6 offset-2 offset-lg-0 col-lg d-flex align-items-center  pb-4  pb-lg-0">
+                                <img class="img-fluid size-img" src="klient-1.png" alt="logo-klient-1">
+                                <p class="text-capitalize pl-3 m-0">konsumencki lider jakości 2018</p>
+
+
+                            </div>
+                            <div class="col-6 offset-2 offset-lg-0 col-lg d-flex align-items-center  pb-4 pb-lg-0">
+                                <img class="img-fluid size-img" src="klient-2.png" alt="logo-klient-2">
+                                <p class="text-capitalize pl-2 m-0">gwiazda obsługi klienta 2018</p>
+
+                            </div>
+                            <div class="col-6 offset-2 offset-lg-0 col-lg d-flex align-items-center  pb-4 pb-lg-0">
+
+                                <img class="img-fluid size-img" src="klient-3.png" alt="logo-klient-3">
+                                <p class="text-capitalize pl-2 m-0">najlepsza firma kurierska 2017</p>
+                            </div>
+                            <div class="col-6 offset-2 offset-lg-0 col-lg d-flex align-items-center   pb-4 pb-lg-0">
+                                <img class="img-fluid size-img" src="klient-4.png" alt="logo-klient-4">
+                                <p class="text-capitalize pl-2 m-0">marka godna zaufania <br>2018</p>
+
+                            </div>
+                            <div class="col-6  offset-2 offset-lg-0 col-lg d-flex align-items-center  pb-4 pb-lg-0">
+
+                                <img class="img-fluid size-img" src="klient-5.png" alt="logo-klient-5">
+                                <p class="text-capitalize pl-2 pr-lg-5 m-0">jakość obsługi QI 2017</p>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-3  pl-4 pl-md-0  ml-lg-0 pt-md-5">
+                                <img class="logo-opineo img-fluid" src="logo-opineo.png" alt="">
+                            </div>
+
+                            <div class="col-12 col-md-9 pt-4 pt-md-5 ">
+                                <h5 class="pb-2 pl-3"><span class="text-red ">90% </span> odbiorców
+                                    paczek
+                                    zamieszczających opinie na Opineo.pl poleca usługi DHL Parcel</h5>
+                                <div class="pl-3">
+                                    <span class="text-red ">Zaufali nam liderzy </span>
+                                    <h5>największych branż w eHandlu – dane zgodnie z badniem Gemius „eCommerce
+                                        w Polsce 2019”</h5>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-3  pl-4 pl-md-0 pt-3 pt-md-0 pb-5 pl-4">
+                                <img class=" logo-gemius img-fluid " src="logo-gemius.png" alt="">
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section> <!-- /klienci-->
+
+        <section>
+            <!-- stopka-->
+            <div class="container-fluid bg-secondary border-top">
+                <div class="row">
+                    <div class="container ">
+                        <div class="row pt-5">
+                            <div class="col-12 col-md-3">
+                                <h2 class="text-capitalize pb-3"> <a href="https://www.dhlparcel.pl/pl/dla-ciebie.html">
+                                        <b class="text-dark">dla ciebie</b></a> </h2>
+                                <ul class="p-0">
+                                    <li class="pb-3"> <a
+                                            href="https://www.dhlparcel.pl/pl/dla-ciebie/wysylka.html">Nadawanie
+                                            przesyłek</a></li>
+                                    <li class="pb-3"> <a
+                                            href="https://www.dhlparcel.pl/pl/dla-ciebie/odbior.html">Odbieranie
+                                            przesyłek</a></li>
+                                    <li class="pb-3"> <a
+                                            href="https://www.dhlparcel.pl/pl/dla-ciebie/obsluga/kontakt/sledzenie.html">
+                                            Śledzenie przesyłek</a> </li>
+                                    <li class="pb-3"> <a
+                                            href="https://www.dhlparcel.pl/pl/dla-ciebie/odbior/przekieruj.html">
+                                            Przekierowanie przesyłek</a> </li>
+                                    <li> <a href="https://www.dhlparcel.pl/pl/dla-ciebie/obsluga.html"> Obsługa
+                                            klienta indywidualnego</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <h2 class="pb-3"><a href="https://www.dhlparcel.pl/pl/dla-biznesu.html"><b
+                                            class="text-dark">Dla biznesu</b></a></h2>
+                                <ul class="p-0">
+                                    <li class="pb-3"><a
+                                            href="https://www.dhlparcel.pl/pl/dla-biznesu/przesylki-krajowe.html">Przesyłki
+                                            krajowe</a></li>
+                                    <li class="pb-3"><a
+                                            href="https://www.dhlparcel.pl/pl/dla-biznesu/przesylki-miedzynarodowe.html">Przesyłki
+                                            międzynarodowe</a></li>
+                                    <li class="pb-3"><a
+                                            href="https://www.dhlparcel.pl/pl/dla-biznesu/przesylki-krajowe/e-commerce.html">Rozwiązania
+                                            dla e-commerce</a></li>
+                                    <li class="pb-3"><a
+                                            href="https://www.dhlparcel.pl/pl/dla-biznesu/uslugi/narzedzia.html">Narzędzia
+                                            dla biznesu</a></li>
+                                    <li class="pb-3"><a
+                                            href="https://www.dhlparcel.pl/pl/dla-biznesu/obsluga/oplata-paliwowa.html">Opłata
+                                            paliwowa i drogowa</a></li>
+                                    <li class="pb-3"><a
+                                            href="https://www.dhlparcel.pl/pl/dla-biznesu/obsluga.html">Obsługa
+                                            klienta biznesowego</a></li>
+                                    <li><a
+                                            href="https://www.dhlparcel.pl/pl/dla-biznesu/obsluga/kontakt-organy-administracji-panstwowej.html">Kontakt
+                                            dla organów administracji państwowej</a></li>
+
+                                </ul>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <h2 class="text-capitalize pb-3"><a href="https://www.dhlparcel.pl/pl/o-dhl.html"><b
+                                            class="text-dark">o DHL
+                                            parcel</b></a></h2>
+                                <ul class="p-0">
+                                    <li class="pb-3"><a href="https://www.dhlparcel.pl/pl/o-dhl.html">O nas</a>
+                                    </li>
+                                    <li class="pb-3"><a
+                                            href="https://www.dhlparcel.pl/pl/o-dhl/media-kontakt.html">Informacje
+                                            prasowe</a></li>
+                                    <li class="pb-3"><a
+                                            href="https://www.dhlparcel.pl/pl/o-dhl/wazne-informacje.html">Ważne
+                                            informacje</a></li>
+                                    <li class="pb-3"><a href="https://www.dhlparcel.pl/pl/praca.html">Praca</a>
+                                    </li>
+                                    <li class="pb-3"><a
+                                            href="https://www.dhlparcel.pl/pl/o-dhl/polityka-prywatnosci.html">Polityka
+                                            prywatności i cookies</a></li>
+                                    <li class="pb-3"><a
+                                            href="https://www.dhlparcel.pl/pl/o-dhl/przetwarzanie-danych-osobowych.html">Przetwarzanie
+                                            danych osobowych</a></li>
+                                    <li><a href="https://www.dhlparcel.pl/pl/toolbar/footer/informacje-o-spolce.html">Informacje
+                                            o spółce</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <h2 class="text-capitalize pb-3"><b class="text-dark">social</b></h2>
+                                <ul class="p-0 d-flex list-unstyled">
+                                    <li><a class="pr-3"
+                                            href="https://www.youtube.com/channel/UCsVx_V0__QcaMxH7KPpUXgQ"><i
+                                                class="fa fa-youtube  text-red " aria-hidden="true" target="_blank"></i>
+                                        </a>
+                                    </li>
+                                    <li><a href="https://www.linkedin.com/company/dhl-parcel/"><i
+                                                class="fa fa-linkedin text-red" aria-hidden="true" target="_blank"></i>
+                                        </a></li>
+
+                                </ul>
+                            </div>
+        </section> <!-- /stopka-->
+    </div>
+    <script src="validate.js" type="text/javascript"></script>
+    <script>
+    var validator = new FormValidator('contactform', [{
+        name: 'telefon',
+        rules: 'numeric|required|exact_length[9]'
+    },
+    {
+        name: 'nip',
+        rules: 'numeric|required|exact_length[10]'
+    }],
+    function(errors, evt) {
+        if (errors.length > 0) {
+            var errorString = '';
+            for (var i = 0, errorLength = errors.length; i < errorLength; i++) {
+                errorString += errors[i].message + '<br>';
+            }
+            var form_error = document.getElementById('form_error');
+            form_error.style.display = 'block';
+            form_error.innerHTML = errorString;
+        }
+    }
+    );
+    </script>
+
+<!-- BEGIN callpage.io widget -->
+<!-- IMPORTANT: Remove script below if you don't need support for older browsers. -->
+<script>(function () {var script = document.createElement('script');script.src = 'https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js';script.async = false;document.head.appendChild(script);}())</script><script>var __cp = {"id":"tj3a4HH766Rql2iGhSVJVXwGbILCgkhA4FEwJEy9aK8","version":"1.1"};(function (window, document) {var cp = document.createElement('script');cp.type = 'text/javascript';cp.async = false;cp.src = "++cdn-widget.callpage.io+build+js+callpage.js".replace(/[+]/g, '/').replace(/[=]/g, '.');var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(cp, s);if (window.callpage) {alert('You could have only 1 CallPage code on your website!');} else {window.callpage = function (method) {if (method == '__getQueue') {return this.methods;}else if (method) {if (typeof window.callpage.execute === 'function') {return window.callpage.execute.apply(this, arguments);}else {(this.methods = this.methods || []).push({arguments: arguments});}}};window.callpage.__cp = __cp;window.callpage('api.button.autoshow');}})(window, document);</script>
+<!-- END callpage.io widget -->
+
+</body>
+
+</html>
