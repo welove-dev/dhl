@@ -57,11 +57,7 @@ $request = 'http'.(($isHttps) ? 's' : '' ).'://' . $_SERVER['HTTP_HOST'] . $_SER
         .bg-logo-alfa {
             background-image: linear-gradient(-180deg, #fc0 0, #ffd83f 70%, rgba(255, 216, 63, 0) 100%);
         }
-        .header-img {
-            background: url("header-dhl.jpg") no-repeat #c8deeb;
-            height: 433px;
-            background-position: left center;
-        }
+
         .logo-gradient {
             position: absolute;
             left: 2%;
@@ -212,6 +208,11 @@ $request = 'http'.(($isHttps) ? 's' : '' ).'://' . $_SERVER['HTTP_HOST'] . $_SER
         .embed-responsive {
             height: 1200px;
         }
+        /* .header-img {
+                background: url("baner.jpg") no-repeat #c8deeb;
+                height: 433px;
+                background-position: left center;
+            } */
         .card-header {
             font-size: 1.75rem !important;
             min-height: 120px;
@@ -253,28 +254,35 @@ $request = 'http'.(($isHttps) ? 's' : '' ).'://' . $_SERVER['HTTP_HOST'] . $_SER
             .logo-gemius {
                 width: 70% !important;
             }
+            .baner_desktop {
+                min-width: 100%;
+                display:block
+            }
+            .baner_mobile {
+                display:none
+            }
+            
         }
         @media (max-width:1200px) {
             .logo-opineo,
             .logo-gemius {
                 width: 80% !important;
             }
-            .header-img {
-                background: url("header-dhl.jpg") no-repeat #c8deeb;
-                height: 433px;
-                background-position: left center;
+            .baner_desktop {
+                min-width: 100%;
+                display:block
             }
+            .baner_mobile {
+                display:none
+            }
+            
         }
         @media (max-width:992px) {
             .logo-opineo,
             .logo-gemius {
                 width: 100% !important;
             }
-            .header-img {
-                background-color: #c8deeb;
-                background-size: contain;
-                background-position: left center;
-            }
+
             .card-deck .card {
                 flex: 1 1 auto;
             }
@@ -296,9 +304,20 @@ $request = 'http'.(($isHttps) ? 's' : '' ).'://' . $_SERVER['HTTP_HOST'] . $_SER
             .logo-gemius {
                 width: 60% !important;
             }
-            .header-img {
-                background-position: -700px;
+            .baner_mobile {
+                min-width: 100%;
+                display:block
             }
+            .baner_desktop {
+                min-width: 100%;
+                display:none
+            }
+            /* .header-img {
+                background-size: contain;
+                background: url("ban_mobile.jpg") no-repeat #c8deeb;
+                height: 433px;
+                background-position: left center;
+            } */
         }
         .header-icon{
             font-size: 1.7em;
@@ -321,7 +340,8 @@ $request = 'http'.(($isHttps) ? 's' : '' ).'://' . $_SERVER['HTTP_HOST'] . $_SER
                     <div class="container ">
                         <div class="row">
                             <div class="col-12 header-img ">
-                                
+                                <img src="baner.jpg" class="baner_desktop" style="width: 100%;">
+                                <img src="ban_mobile.jpg" class="baner_mobile" style="width: 100%;">
                             </div>
                         </div>
                     </div>
@@ -333,18 +353,18 @@ $request = 'http'.(($isHttps) ? 's' : '' ).'://' . $_SERVER['HTTP_HOST'] . $_SER
                           <div class="col-sm mt-4 pr-4">
                             <i class="far fa-check-circle header-icon"></i>
                             <div class="header-text"><strong>Integracja IT</strong><br>
-                            <p>Automatyzacja codziennych przesyłek</p></div>
+                            <p>automatyzacja codziennych przesyłek</p></div>
                             
                           </div>
                           <div class="col-sm mt-4 pr-4">
                             <i class="far fa-check-circle header-icon"></i>
-                            <div class="header-text"><strong>DHL24</strong><br>
-                            <p>Centrum zarządzania Twoimi przesyłkami</p></div>
+                            <div class="header-text"><strong>DHL 24</strong><br>
+                            <p>centrum zarządzania Twoimi przesyłkami</p></div>
                           </div>
                           <div class="col-sm mt-4 pr-4">
                             <i class="far fa-check-circle header-icon"></i>
                             <div class="header-text"><strong>Faktury i rozliczenia</strong><br>
-                            <p>Zawsze dostępne w jednym miejscu</p></div>
+                            <p>zawsze dostępne w jednym miejscu</p></div>
                           </div>
                         </div>
                       </div>
