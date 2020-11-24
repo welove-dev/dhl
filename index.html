@@ -253,11 +253,30 @@ $request = 'http'.(($isHttps) ? 's' : '' ).'://' . $_SERVER['HTTP_HOST'] . $_SER
                 width: 70% !important;
             }
             .baner_desktop {
-                min-width: 100%;
-                display:block
+                display:none
             }
             .baner_mobile {
                 display:none
+            }
+            .baner_desktop_huge {
+                
+                min-width: 100%;
+                display:block
+            }
+            
+        }
+        @media (min-width:1700px) {
+
+            .baner_desktop {
+                display:none;
+            }
+            .baner_mobile {
+                display:none
+            }
+            .baner_desktop_huge {
+                min-width: 100%;
+                display:block;
+                
             }
             
         }
@@ -271,6 +290,9 @@ $request = 'http'.(($isHttps) ? 's' : '' ).'://' . $_SERVER['HTTP_HOST'] . $_SER
                 display:block
             }
             .baner_mobile {
+                display:none
+            }
+            .baner_desktop_huge {
                 display:none
             }
             
@@ -307,7 +329,10 @@ $request = 'http'.(($isHttps) ? 's' : '' ).'://' . $_SERVER['HTTP_HOST'] . $_SER
                 display:block
             }
             .baner_desktop {
-                min-width: 100%;
+                display:none
+            }
+            .baner_desktop_huge {
+
                 display:none
             }
             /* .header-img {
@@ -333,17 +358,11 @@ $request = 'http'.(($isHttps) ? 's' : '' ).'://' . $_SERVER['HTTP_HOST'] . $_SER
     <div class="wrap">
         <section>
             <!-- header -->
+            <img src="baner.jpg" class="baner_desktop" style="width: 100%;">
+            <img src="baner_100.jpg" class="baner_desktop_huge" style="width: 100%;">
+            <img src="ban_mobile.jpg" class="baner_mobile" style="width: 100%;">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="container ">
-                        <div class="row">
-                            <div class="col-12 header-img ">
-                                <img src="baner.jpg" class="baner_desktop" style="width: 100%;">
-                                <img src="ban_mobile.jpg" class="baner_mobile" style="width: 100%;">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
                 <div class="row">
                     <div class="container">
                         <div class="row">
