@@ -10,15 +10,13 @@ $request = 'http'.(($isHttps) ? 's' : '' ).'://' . $_SERVER['HTTP_HOST'] . $_SER
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <title></title>
-    <style>
+     <style>
         @font-face {
             font-family: 'Delivery-Rg';
             src: url('fonts/Delivery_W_Rg.woff2') format('woff2'),
@@ -345,7 +343,6 @@ $request = 'http'.(($isHttps) ? 's' : '' ).'://' . $_SERVER['HTTP_HOST'] . $_SER
                             </div>
                         </div>
                     </div>
-                    
                 </div>
                 <div class="row">
                     <div class="container">
@@ -369,7 +366,6 @@ $request = 'http'.(($isHttps) ? 's' : '' ).'://' . $_SERVER['HTTP_HOST'] . $_SER
                         </div>
                       </div>
                 </div>
-                
             </div>
         </section><!-- /header -->
 
@@ -377,23 +373,16 @@ $request = 'http'.(($isHttps) ? 's' : '' ).'://' . $_SERVER['HTTP_HOST'] . $_SER
             <!-- 3 kolumny cards -->
             <div class="container-fluid">
                 <div class="row">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
-                                <div class="embed-responsive embed-responsive-16by9" id="formularz">
-                                    <iframe src="https://samoofertowanie.dhlparcel.pl/form/fast" frameborder="0" class="embed-responsive-item"></iframe>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="container-fluid">
                         <div class="row">
                             <div class="col-12">
                                 <h2 class="text-center text-red my-5">Wybierz ofertę dopasowaną do swoich potrzeb</h2>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col">
+                        <div class="row px-3 px-md-5">
+                            <div class="col px-2 px-md-5">
                                 <div class="card-deck">
-                                    <div class="card shadow mx-3">
+                                    <div class="card shadow mx-3 my-5 my-md-0">
                                         <h4 class="pt-3 card-header bg-gradient text-center font-weight-bold text-uppercase border-0">do 30 paczek/mies.</h4>
                                         <div class="card-body px-3 pt-4">
                                             <div class="card-title--wrapper d-flex align-items-center justify-content-center">
@@ -413,7 +402,7 @@ $request = 'http'.(($isHttps) ? 's' : '' ).'://' . $_SERVER['HTTP_HOST'] . $_SER
                                             <a href="#formularz" class="btn btn-primary text-center">Zamawiam ofertę</a>
                                         </div>
                                     </div>
-                                    <div class="card shadow mx-3">
+                                    <div class="card shadow mx-3 my-5 my-md-0">
                                         <h4 class="pt-3 card-header bg-light text-center font-weight-bold text-uppercase border-0">od 30 paczek/mies.</h4>
                                         <div class="card-body px-3 pt-4">
                                             <div class="card-title--wrapper d-flex align-items-center justify-content-center">
@@ -433,7 +422,27 @@ $request = 'http'.(($isHttps) ? 's' : '' ).'://' . $_SERVER['HTTP_HOST'] . $_SER
                                             <a href="#formularz" class="btn btn-primary text-center">Zamawiam ofertę</a>
                                         </div>
                                     </div>
-                                    <div class="card shadow mx-3">
+                                    <div class="card shadow mx-3 my-5 my-md-0">
+                                        <h4 class="pt-3 card-header bg-light text-center font-weight-bold text-uppercase border-0">od 100 paczek/mies.</h4>
+                                        <div class="card-body px-3 pt-4">
+                                            <div class="card-title--wrapper d-flex align-items-center justify-content-center">
+                                                <h3 class="card-title text-primary text-center"><strong>stawki indywidualne</strong></h3>
+                                            </div>
+                                            <ul class="mt-4 pl-4">
+                                                <li><b>od 0,85 zł za ubezpieczenie</b> do 50 tys. zł</li>
+                                                <li><b>od 2,5 zł za płatność pobraniem</b> (COD)</li>
+                                                <li>podjazd kuriera bez opłat</li>
+                                                <li>bezpłatna możliwość ustalenia stałych zbiorów</li>
+                                                <li>tylko <b>+2,50 zł za dostawę z gwarancją next day</b> (DHL Premium)</li>
+                                                <li><b>bezpłatne powiadomienia</b> e-mail i SMS dla odbiorców</li>
+                                                <li><b>jedna umowa</b> dla paczek kurierskich, do punktu i palet</li>
+                                            </ul>
+                                        </div>
+                                        <div class="pb-5 card-footer text-center bg-white border-0">
+                                            <a href="#formularz" class="btn btn-primary text-center">Zamawiam ofertę</a>
+                                        </div>
+                                    </div>
+                                    <div class="card shadow mx-3 my-5 my-md-0">
                                         <h4 class="pt-3 card-header bg-light text-center font-weight-bold text-uppercase border-0">od 100 paczek/mies.</h4>
                                         <div class="card-body px-3 pt-4">
                                             <div class="card-title--wrapper d-flex align-items-center justify-content-center">
@@ -456,8 +465,8 @@ $request = 'http'.(($isHttps) ? 's' : '' ).'://' . $_SERVER['HTTP_HOST'] . $_SER
                                 </div>
                             </div>
                         </div>
-                        <div class="row mt-5">
-                            <div class="col">
+                        <div class="row mt-5 px-5">
+                            <div class="col px-5">
                                 <p class="mb-2">
                                     Podane powyżej ceny, to ceny netto, bez kosztów opłaty paliwowej i drogowej oraz usług dodatkowych.
                                 </p>
@@ -466,7 +475,13 @@ $request = 'http'.(($isHttps) ? 's' : '' ).'://' . $_SERVER['HTTP_HOST'] . $_SER
                                 </p>
                             </div>
                         </div>
-                        
+                        <div class="row">
+                            <div class="col">
+                                <div class="embed-responsive embed-responsive-16by9" id="formularz">
+                                    <iframe src="https://samoofertowanie.dhlparcel.pl/form/fast" frameborder="0" class="embed-responsive-item"></iframe>
+                                </div>
+                            </div>
+                        </div>
                         
                     </div>
                 </div>
